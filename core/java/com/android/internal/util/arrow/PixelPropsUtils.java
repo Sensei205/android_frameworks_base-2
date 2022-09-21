@@ -160,7 +160,7 @@ public class PixelPropsUtils {
                 if (!SystemProperties.getBoolean("persist.sys.pixelprops.gphotos", true))
                     return;
             }
-            
+
             Map<String, Object> propsToChange = propsToChangePixel6;
 
             if (Arrays.asList(packagesToChangePixel5).contains(packageName)) {
@@ -190,6 +190,10 @@ public class PixelPropsUtils {
                 setPropValue("FINGERPRINT", Build.DATE);
             }
         } else {
+
+            if (!SystemProperties.getBoolean("persist.sys.pixelprops.games", false))
+                return;
+            
             if (Arrays.asList(packagesToChangeROG1).contains(packageName)) {
                 if (DEBUG) Log.d(TAG, "Defining props for: " + packageName);
                 for (Map.Entry<String, Object> prop : propsToChangeROG1.entrySet()) {
