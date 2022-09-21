@@ -17,6 +17,7 @@
 
 package com.android.internal.util.arrow;
 
+import android.app.Application;
 import android.os.Build;
 import android.os.SystemProperties;
 import android.util.Log;
@@ -216,7 +217,10 @@ public class PixelPropsUtils {
                 setPropValue(key, value);
             }
         if (packageName.equals("com.google.android.gms")) {
-                sIsGms = true;
+            final String processName = Application.getProcessName();
+                if (processName.equals("com.google.android.gms.unstable")) {
+                    sIsGms = true;
+                }
             }
             // Set proper indexing fingerprint
             if (packageName.equals("com.google.android.settings.intelligence")) {
